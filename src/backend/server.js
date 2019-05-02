@@ -1,4 +1,4 @@
-var express =  require('express')
+var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 const port = 8080
@@ -11,6 +11,6 @@ app.use('/customer', customerController)
 
 app.use(express.static('public'))
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`Server is listening on ${port}`)
 })
