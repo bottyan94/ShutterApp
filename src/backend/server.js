@@ -1,10 +1,13 @@
 var express =  require('express')
 var app = express()
+var bodyParser = require('body-parser')
 const port = 8080
 
-app.use('/', (req, res) => {
-    res.status(200).send("Hello")
-})
+app.use(bodyParser.json());
+
+const customerController = require('./Customer/customerController')
+app.use('/customer', customerController)
+
 
 app.use(express.static('public'))
 
