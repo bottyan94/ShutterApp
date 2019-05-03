@@ -8,6 +8,8 @@ app.use(bodyParser.json());
 const customerController = require('./Customer/customerController')
 app.use('/customer', customerController)
 
+const workerController = require('./Worker/workerController')
+app.use('/worker',workerController)
 
 app.use(express.static('public'))
 

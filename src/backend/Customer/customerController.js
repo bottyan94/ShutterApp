@@ -14,7 +14,7 @@ router.get('/list', (req, res) => {
     })
 })
 router.get('/ownOrders', (req, res) => {
-    customerService.ownOrders(req.query['name'], (request) => {
+    customerService.ownOrders(req.query['customerID'], (request) => {
         res.status(200).send(request)
     })
 })
@@ -57,11 +57,11 @@ router.post('/addWindow', (req, res) => {
     res.status(200).send(req.body)
 })
 router.post('/addShutter', (req, res) => {
-    if (req.body[`shutters`][`shutter`][`height`] == undefined || req.body[`shutters`][`shutter`][`height`] === "" || req.body[`shutters`][`shutter`][`height`] < 20) {
+    if (req.body[`shutter`][`height`] == undefined || req.body[`shutter`][`height`] === "" || req.body[`shutter`][`height`] < 20) {
         res.status(414).send("Window Height must be defined or too small this size")
         return
     }
-    if (req.body[`shutters`][`shutter`][`width`] == undefined || req.body[`shutters`][`shutter`][`width`] === "" || req.body[`shutters`][`shutter`][`width`] < 20) {
+    if (req.body[`shutter`][`width`] == undefined || req.body[`shutter`][`width`] === "" || req.body[`shutter`][`width`] < 20) {
         res.status(414).send("Window Width must be defined or too small this size")
         return
     }
@@ -69,8 +69,9 @@ router.post('/addShutter', (req, res) => {
     res.status(200).send(req.body)
 })
 router.post('/submit', (req, res) => {
-    customerService.submit(req.body)
-    res.status(200).send(req.body)
+    customerService.submit(req.body.shutterID, (request) => {
+        res.status(200).send(request)
+    })
 })
 
 module.exports = router;
