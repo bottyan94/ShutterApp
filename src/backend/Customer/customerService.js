@@ -28,7 +28,6 @@ CustomerService.prototype.addShutter = function (data, callback) {
 
 }
 CustomerService.prototype.submit = function (shutterID, callback) {
-    console.log("service: "+shutterID)
     var mit = {"shutter.shutterID": shutterID}
     var mire = {$set: {"shutter.status": "submitted"}}
     this.dao.update("orders", mit, mire, (request) => {
@@ -36,7 +35,6 @@ CustomerService.prototype.submit = function (shutterID, callback) {
     })
 }
 CustomerService.prototype.ownOrders = function (customerID, callback) {
-    console.log(customerID)
     var id={"customer.customerID":Number(customerID)}
     this.dao.read(id,"orders", (request) => {
         callback(request)
@@ -44,11 +42,6 @@ CustomerService.prototype.ownOrders = function (customerID, callback) {
 }
 
 /*
-CustomerService.prototype.ownOrders = function (customerID, callback) {
-    this.CustomerDAO.ownOrders(customerID, (request) => {
-        callback(request)
-    })
-}
 CustomerService.prototype.addWindow = function (data) {
     this.CustomerDAO.addWindow(data)
 }

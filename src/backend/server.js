@@ -11,6 +11,10 @@ app.use('/customer', customerController)
 const workerController = require('./Worker/workerController')
 app.use('/worker',workerController)
 
+const managerController = require('./Manager/managerController')
+app.use('/manager',managerController)
+
+
 app.use(express.static('public'))
 
 app.listen(port, () => {

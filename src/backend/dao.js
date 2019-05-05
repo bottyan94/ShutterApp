@@ -7,7 +7,7 @@ const dbName = 'shutter'
 
 
 function read(findParams, collectionName, callback) {
-    console.log(findParams)
+    console.log("read: "+{findParams})
     var client = new MongoClient(url);
     client.connect((err) => {
         assert.equal(null, err);
@@ -24,7 +24,7 @@ function readAll(collectionName,callback) {
         callback(result)
     })
 }
-function insert(collectionName, data) {
+function insert(collectionName, data,callback) {
     var client = new MongoClient(url)
     client.connect((err) => {
         assert.equal(null, err);
@@ -32,12 +32,12 @@ function insert(collectionName, data) {
         db.collection(collectionName).insertOne(data, (err) => {
             assert.equal(null, err)
             client.close()
-
+            callback("inserted")
         })
     })
 }
 function update(collectionName,mit,mire,callback){
-    console.log({mit},{mire})
+    console.log("update: "+{mit},{mire})
     var client = new MongoClient(url)
     client.connect((err) => {
         assert.equal(null, err);
@@ -45,7 +45,7 @@ function update(collectionName,mit,mire,callback){
         db.collection(collectionName).updateOne(mit,mire, (err) => {
             assert.equal(null, err)
             client.close()
-            callback("ok")
+            callback("updated")
         })
     })
 }
