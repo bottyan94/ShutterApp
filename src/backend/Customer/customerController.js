@@ -29,10 +29,6 @@ router.post('/registerCustomer', (req, res) => {
         res.status(414).send("Email must be defined")
         return
     }
-    if (req.body[`customer`][`phone`] == undefined || req.body[`customer`][`phone`] === "") {
-        res.status(414).send("Phone must be defined")
-        return
-    }
     if (req.body[`customer`][`birth`] == undefined || req.body[`customer`][`birth`] === "") {
         res.status(414).send("Birth must be defined")
         return
@@ -57,19 +53,26 @@ router.post('/addWindow', (req, res) => {
     res.status(200).send(req.body)
 })
 router.post('/addShutter', (req, res) => {
-    if (req.body[`shutter`][`height`] == undefined || req.body[`shutter`][`height`] === "" || req.body[`shutter`][`height`] < 20) {
-        res.status(414).send("Window Height must be defined or too small this size")
-        return
-    }
-    if (req.body[`shutter`][`width`] == undefined || req.body[`shutter`][`width`] === "" || req.body[`shutter`][`width`] < 20) {
-        res.status(414).send("Window Width must be defined or too small this size")
-        return
-    }
-    customerService.addShutter(req.body)
-    res.status(200).send(req.body)
+    /*  if (req.body[`shutter`][`height`] == undefined || req.body[`shutter`][`height`] === "" || req.body[`shutter`][`height`] < 20) {
+          res.status(414).send("Window Height must be defined or too small this size")
+          return
+      }
+      if (req.body[`shutter`][`width`] == undefined || req.body[`shutter`][`width`] === "" || req.body[`shutter`][`width`] < 20) {
+          res.status(414).send("Window Width must be defined or too small this size")
+          return
+      }*/
+    customerService.addShutter(req.body,
+        (request) =>{
+            res.status(200).send(request)
+        },
+        (cause) => {
+            res.status(400).send(cause)
+        })
 })
+
+
 router.post('/submit', (req, res) => {
-    customerService.submit(req.body.shutterID, (request) => {
+    customerService.submit(req.body.orderID, (request) => {
         res.status(200).send(request)
     })
 })

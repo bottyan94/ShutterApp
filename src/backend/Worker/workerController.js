@@ -18,7 +18,7 @@ router.post('/selectedOrder', (req, res) => {
     })
 })
 router.post('/listParts', (req, res) => {
-    workerService.listParts(req.body.shutterID, (request) => {
+    workerService.listParts(req.body.orderID, (request) => {
         res.status(200).send(request)
     })
 })
