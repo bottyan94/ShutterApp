@@ -1,4 +1,17 @@
+var uniqID = require('uniq-id');
+
 function CustomerService(dao) {
+    winston = require('winston')
+    md5 = require('md5.js')
+    logger = winston.createLogger({
+        level: 'info',
+        format: winston.format.json(),
+        defaultMeta: {service: 'user-service'},
+        transports: [
+            new winston.transports.File({filename: 'error.log', level: 'error'}),
+            new winston.transports.File({filename: 'combined.log'})
+        ]
+    });
     if (dao != undefined && dao != null) {
         this.dao = dao
     }
@@ -8,62 +21,89 @@ function CustomerService(dao) {
 }
 
 CustomerService.prototype.list = function (callback) {
-    this.dao.readAll("customers", (request) => {
-        callback(request)
+    this.dao.readAll("customers", (customers) => {
+        logger.info(`${customers.length} customers were found!`)
+        callback(customers)
     })
 }
-CustomerService.prototype.registerCustomer = function (data, callback) {
-    this.dao.piece({"customer.customerID": data.customer.customerID}, 'customers', (piece) => {
+CustomerService.prototype.registerCustomer = function (customer, succes, error) {
+    var customerID = uniqID.generateUUID('xxxx', 10)();
+
+    this.dao.piece({"_id": customerID}, 'customers', (piece) => {
         if (piece !== 0) {
-            callback("This customerID is already in use!")
+            error("This customer _id is already in use! Try again")
         } else {
-            this.dao.insert('customers', data, (insert) => {
-                callback(insert)
+            customer['_id'] = customerID
+            this.dao.insert('customers', customer, (inserted) => {
+                logger.info(`${customer.customer.name} inserted!`)
+                succes(inserted)
             })
         }
-
     })
 }
-CustomerService.prototype.addShutter = function (data, callback) {
-console.log(data.orderID)
-    this.dao.exists({"orderID": data.orderID}, 'orders', (piece) => {
+CustomerService.prototype.addShutter = function (data, succes, error) {
+//console.log(data.orderID)
+    var orderID = uniqID.generateUUID('xxxx', 10)();
+    var shutterID
+    this.dao.piece({"orderID": orderID}, 'orders', (piece) => {
         if (piece !== 0) {
-            callback("This orderID is already in use!")
+            error("This orderID is already in use!")
         } else {
-            this.dao.insert('orders', data, (insert) => {
-                callback(insert)
+            data['_id'] = orderID
+            for (let i of  data['shutter']) {
+                shutterID = uniqID.generateUUID('xxxx', 10)();
+                i.shutterID = shutterID
+                //  console.log(i.shutterID)
+            }
+            this.dao.insert('orders', data, () => {
+                // console.log(data.customer.customerID)
+                var mit = {"_id": data.customer.customerID.toString()}
+                var mire = {$push: {"customer.ordersID": orderID}}
+                this.dao.update("customers", mit, mire, () => {
+                    logger.info(`${data.customer.name} has placed the order with orderID: ${orderID}`)
+                    succes()
+                })
             })
-            var mit = {"customer.customerID": data.customer.customerID}
-            var mire = {$push: {"customer.ordersID": data.orderID}}
-            this.dao.update("customers", mit, mire, (request) => {
-                callback(request)
-            })
+
         }
-
-
     })
-
-
 }
-CustomerService.prototype.submit = function (orderID, succes) {
-    var mit = {"orderID": orderID}
+CustomerService.prototype.submit = function (orderID, succes, error) {
+    var mit = {"_id": orderID}
     var mire = {$set: {"status": "submitted"}}
-    this.dao.update("orders", mit, mire, (request) => {
-        succes(request)
+    this.dao.read(mit, "orders", (order) => {
+        if (order[0].status === "added") {
+            this.dao.update("orders", mit, mire, () => {
+                succes()
+            })
+        } else {error()}
     })
 }
-CustomerService.prototype.ownOrders = function (customerID, callback) {
+CustomerService.prototype.invoice = function (orderID, succes, error) {
+    var mit = {"_id": orderID}
+    this.dao.read(mit, "orders", (order) => {
+       // console.log(order[0].invoice)
+        if(order[0].invoice !== undefined && order[0].invoice !== null){
+            succes(order)
+        } else error("Nincs még számla")
+    })
+}
+
+CustomerService.prototype.ownOrders = function (customerID, succes) {
+    //console.log(customerID)
     var id = {"customer.customerID": Number(customerID)}
-    this.dao.read(id, "orders", (request) => {
-        callback(request)
+    this.dao.read(id, "orders", (orders) => {
+        succes(orders)
+    })
+}
+CustomerService.prototype.ownOrdersShutters = function (customerID, succes) {
+    //console.log(customerID)
+    var id = {"customer.customerID": Number(customerID)}
+    this.dao.read(id, "orders", (orders) => {
+        console.log(orders)
+        succes(orders)
     })
 }
 
-/*
-CustomerService.prototype.addWindow = function (data) {
-    this.CustomerDAO.addWindow(data)
-}
-
-}*/
 
 module.exports = CustomerService;

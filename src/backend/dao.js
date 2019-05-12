@@ -5,24 +5,25 @@ const url = 'mongodb://localhost:27017'
 
 const dbName = 'shutter'
 
-
 function read(findParams, collectionName, callback) {
-
+    //console.log(findParams)
+   // console.log(collectionName)
     var client = new MongoClient(url);
     client.connect((err) => {
         assert.equal(null, err);
         const db = client.db(dbName)
-        db.collection(collectionName).find(findParams).toArray(function (err, docs) {
-            assert.equal(err, null)
+     db.collection(collectionName).find(findParams).toArray(function (err, docs) {
+          //  assert.equal(err, null)
           //  console.log(docs)
             callback(docs)
         })
         client.close();
     })
 }
-
 function readAll(collectionName, callback) {
+    //console.log(collectionName)
     read({}, collectionName, (result) => {
+        //console.log(result)
         callback(result)
     })
 }
@@ -55,14 +56,14 @@ function update(collectionName, mit, mire, callback) {
 }
 
 function piece(findParam, collectionName, callback) {
-    console.log(findParam)
+    //console.log(findParam)
     var client = new MongoClient(url);
     client.connect((err) => {
         assert.equal(null, err);
         const db = client.db(dbName)
         db.collection(collectionName).find(findParam).count(function (err,piece) {
            assert.equal(err, null)
-            console.log(piece)
+          //  console.log(piece)
            callback(piece)
        });
        client.close();

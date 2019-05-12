@@ -12,19 +12,26 @@ router.get('/listOrders', (req, res) => {
         res.status(200).send(requests)
     })
 })
-router.post('/selectedOrder', (req, res) => {
-    workerService.selectedOrder(req.body.shutterID, (request) => {
-        res.status(200).send(request)
-    })
+router.get('/selectShutter/:shutterID', (req, res) => {
+  //  console.log(req.params['shutterID'])
+    workerService.selectShutter(req.params['shutterID'],
+        (request) => {res.status(200).send(request)},
+            (bcs) => {res.status(400).send(bcs)})
 })
 router.post('/listParts', (req, res) => {
-    workerService.listParts(req.body.orderID, (request) => {
-        res.status(200).send(request)
-    })
+    workerService.listParts(req.body.orderID,
+        (request) => {
+        res.status(200).send(request)},
+        (bcs) => {res.status(400).send(bcs)})
 })
-router.post('/assemble', (req, res) => {
-    workerService.assemble(req.body.shutterID, (request) => {
-        res.status(200).send(request)
-    })
+router.get('/finish/:orderID', (req, res) => {
+    workerService.finish(req.params['orderID'],
+        (request) => {res.status(200).send(request)},
+        (bcs) => {res.status(400).send(bcs)})
+})
+router.get('/listPart/:shutterID', (req, res) => {
+    workerService.listPart(req.params['shutterID'],
+        (request) => {res.status(200).send(request)},
+        (bcs) => {res.status(400).send(bcs)})
 })
 module.exports = router;
