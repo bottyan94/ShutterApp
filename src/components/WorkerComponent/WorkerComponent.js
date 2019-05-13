@@ -1,6 +1,5 @@
 import React from 'react';
-import CustomerActions from "../../actions/CustomerActions";
-import CustomerStore from "../../store/CustomerStore";
+
 import WorkerStore from "../../store/WorkerStore"
 import WorkerActions from "../../actions/WorkerActions";
 

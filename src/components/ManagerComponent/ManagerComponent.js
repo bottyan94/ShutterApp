@@ -2,13 +2,6 @@ import React from 'react';
 
 import ManagerStore from "../../store/ManagerStore"
 import ManagerAction from "../../actions/ManagerAction";
-import CustomerActions from "../../actions/CustomerActions";
-import CustomerList from "../CustomerComponent/CustomerList";
-import OrdersDetails from "../CustomerComponent/OrdersDetails";
-import WorkerComponent from "../WorkerComponent/WorkerComponent";
-import ManagerOrdersList from "./ManagerOrdersList";
-import ManagerCustomersList from "./ManagerCustomersList";
-import ManagerOrdersDetails from "./ManagerOrdersDetails";
 
 class ManagerComponent extends React.Component {
     constructor(props) {

@@ -1,10 +1,7 @@
 import React from 'react';
 import CustomerActions from "../../actions/CustomerActions";
 import CustomerStore from "../../store/CustomerStore";
-import CustomerAdd from "./CustomerAdd";
-import CustomerList from "./CustomerList";
-import OrdersDetails from "./OrdersDetails";
-import AddOrders from "./AddOrders";
+
 
 
 class CustomerComponent extends React.Component {

@@ -1,7 +1,6 @@
 import React from 'react'
 import CustomerStore from "../../store/CustomerStore";
 import CustomerActions from "../../actions/CustomerActions";
-import ManagerAction from "../../actions/ManagerAction";
 
 class OrdersDetails extends React.Component {
 

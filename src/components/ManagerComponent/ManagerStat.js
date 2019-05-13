@@ -1,7 +1,8 @@
 import React from 'react';
-import ManagerAction from "../../actions/ManagerAction";
-import ManagerStore from "../../store/ManagerStore";
 import PieChart from 'react-minimal-pie-chart';
+
+import ManagerStore from "../../store/ManagerStore";
+
 
 
 
