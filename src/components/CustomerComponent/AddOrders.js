@@ -13,13 +13,14 @@ class AddOrders extends React.Component {
             width: "",
             color: "",
             type: "",
-            status: ""
+            status: "",
+
         }
         this.state = {
             customer: {customerID: CustomerStore._selectedCustomer},
             shutter: CustomerStore._shutters,
             partsList: [],
-            summ: 0,
+            payment:"waiting",
             status: "added"
         }
     }

@@ -42,6 +42,7 @@ class ManagerOrdersList extends React.Component {
                                     <td>OrderID</td>
                                     <td>Shutters Info</td>
                                     <td>Order status</td>
+                                    <td>Payment</td>
                                     <td>Buttons</td>
                                 </tr>
                                 {this.state.orders.map((order) => {
@@ -73,22 +74,22 @@ class ManagerOrdersList extends React.Component {
                                                 </table>
                                             </td>
                                             <td className="statusText font-weight-bolder font-italic text-uppercase">{order.status}</td>
+                                        <td>
+                                            <td>{order.payment}</td>
+                                        </td>
                                             <td>
-                                            <tr>
                                                 <td>
-                                                    <button className="btn btn-info" id="select"
+                                                    <button className="btn btn-info m-2" id="select"
                                                             onClick={() => ManagerAction.install(order._id)}>Install
                                                     </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <button className="btn btn-info" id="parts"
+
+
+                                                    <button className="btn btn-info m-2" id="parts"
                                                             onClick={() => ManagerAction.invoice(order._id)}>Creat
                                                         Invoice
                                                     </button>
                                                 </td>
-                                            </tr></td>
+                                            </td>
                                         </tr>
 
                                     )

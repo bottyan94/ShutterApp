@@ -35,22 +35,6 @@ router.post('/registerCustomer', (req, res) => {
         })
 })
 router.post('/addShutter', (req, res) => {
-    if (req.body[`shutter`][`height`] == undefined || req.body[`shutter`][`height`] === "") {
-        res.status(414).send("shutter Height must be defined or too small this size")
-        return
-    }
-    if (req.body[`shutter`][`width`] == undefined || req.body[`shutter`][`width`] === "") {
-        res.status(414).send("shutter Width must be defined or too small this size")
-        return
-    }
-    if (req.body[`shutter`][`color`] == undefined || req.body[`shutter`][`color`] === "") {
-        res.status(414).send("shutter color must be defined")
-        return
-    }
-    if (req.body[`shutter`][`type`] == undefined || req.body[`shutter`][`type`] === "") {
-        res.status(414).send("shutter type must be defined")
-        return
-    }
     customerService.addShutter(req.body,
         (request) => {
             res.status(200).send(request)
@@ -78,6 +62,16 @@ router.get('/invoice/:orderID', (req, res) => {
         (invoice) => {
             console.log(invoice);
             res.status(200).send(invoice)
+        },
+        (error) => {
+            res.status(400).send(error)
+        })
+})
+router.get('/pay/:orderID', (req, res) => {
+    customerService.pay(req.params['orderID'],
+        (pay) => {
+            console.log(pay);
+            res.status(200).send(pay)
         },
         (error) => {
             res.status(400).send(error)

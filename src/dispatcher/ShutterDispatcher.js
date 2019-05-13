@@ -107,6 +107,23 @@ shutterDispatcher.register((data) => {
         CustomersStore.emitChange()
     })
 });
+
+//customer/pay
+shutterDispatcher.register((data) => {
+    if (data.payload.actionType !== "pay") {
+        return;
+    }
+    fetch('/customer/pay/' + data.payload.payload, {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    }).then(response => {
+        return response.json()
+    }).then(() => {
+        CustomersStore.emitChange()
+    })
+});
 //customer/register
 shutterDispatcher.register((data) => {
     if (data.payload.actionType !== "addCustomer") {
@@ -146,7 +163,6 @@ shutterDispatcher.register((data) => {
         .then((result) => {
             CustomersStore._shutters = [];
             CustomersStore._selectedCustomer = data.payload.payload.customer.customerID;
-            alert(result)
             CustomersStore.emitChange();
         })
     CustomersStore.emitChange();
@@ -300,6 +316,7 @@ shutterDispatcher.register((data) => {
         React.createElement(ManagerOrdersDetails),
         document.getElementById('ownOrders'),
     );
+
     ManagerStore.emitChange();
 });
 //manager/invoice
@@ -335,7 +352,7 @@ shutterDispatcher.register((data) => {
     }).then(response => {
         return response.text()
     }).then(() => {
-        ManagerActions.listOwnOrders(ManagerStore._selectedCustomer)
+        ManagerActions.listOrders()
         ManagerStore.emitChange()
     })
 

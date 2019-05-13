@@ -39,6 +39,8 @@ class OrdersDetails extends React.Component {
                         <tr>
                             <td>OrderID</td>
                             <td>Shutters</td>
+                            <td>Status and Payment</td>
+                            <td>Buttons</td>
                         </tr>
                         {this.state.store.map((order) => {
                             return (
@@ -51,8 +53,6 @@ class OrdersDetails extends React.Component {
                                                 <td>Height*Width</td>
                                                 <td>Color</td>
                                                 <td>Type</td>
-                                                <td>Status</td>
-
                                             </tr>
                                             {order['shutter'].map((shutter) => {
                                                 return (
@@ -64,24 +64,34 @@ class OrdersDetails extends React.Component {
                                                     </tr>
                                                 );
                                             })}
-                                            <tr>
-                                                <td className="text-center statusText font-weight-bolder font-italic text-uppercase">{order.status}
-
-                                                </td>
-                                                <td>
-                                                    <button id="submit" className="btn btn-success m-2"
-                                                            onClick={() => CustomerActions.submit(order._id)}>Submit
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button id="submit" className="btn btn-success m-2"
-                                                            onClick={() => CustomerActions.invoice(order._id)}>SeeInvoince
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                            </tbody>
                                         </table>
                                     </td>
+                                    <td>
+                                        <td className="text-center statusText font-weight-bolder font-italic text-uppercase">{order.status}
+                                        </td>
+                                        <tr>
+                                            <td>{order.payment}</td>
+                                        </tr>
+                                        <tr>
+                                            <button id="pay" className="btn btn-success m-2"
+                                                    onClick={() => CustomerActions.pay(order._id)}>Pay
+                                            </button>
+                                        </tr>
+                                    </td>
+
+
+                                            <button id="submit" className="btn btn-success m-2"
+                                                    onClick={() => CustomerActions.submit(order._id)}>Submit
+                                            </button>
+
+                                            <button id="submit" className="btn btn-success m-2"
+                                                    onClick={() => CustomerActions.invoice(order._id)}>SeeInvoince
+                                            </button>
+
+
+
+
                                 </tr>
                             )
 

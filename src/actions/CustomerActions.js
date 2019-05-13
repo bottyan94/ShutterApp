@@ -61,6 +61,12 @@ class CustomerActions {
             payload: orderID
         });
     }
+    pay(orderID){
+        ShutterDispatcher.handleViewAction({
+            actionType: "pay",
+            payload: orderID
+        });
+    }
 
 }
 export default new CustomerActions();

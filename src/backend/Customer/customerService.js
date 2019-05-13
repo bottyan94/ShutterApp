@@ -92,6 +92,22 @@ CustomerService.prototype.invoice = function (orderID, succes, error) {
         }
     })
 }
+CustomerService.prototype.pay = function (orderID, succes, error) {
+    var mit = {"_id": orderID}
+    var mire = {$set: {"payment": "paid"}}
+    this.dao.read(mit, "orders", (order) => {
+        console.log(order)
+        if (order[0].payment === "waiting" && order[0].status==="installed") {
+            this.dao.update("orders", mit, mire, () => {
+                logger.info(`${orderID} payment was changed`)
+                succes()
+            })
+        } else {
+            logger.error(`${orderID}not ready to paid`);
+            error(`${orderID} not ready to paid`)
+        }
+    })
+}
 CustomerService.prototype.ownOrders = function (customerID, succes) {
     var id = {"customer.customerID": Number(customerID)}
     this.dao.read(id, "orders", (orders) => {

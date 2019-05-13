@@ -35,6 +35,8 @@ class ManagerOrdersDetails extends React.Component {
                         <tr>
                             <td>OrderID</td>
                             <td>Shutters</td>
+                            <td>Status</td>
+                            <td>Payment</td>
                             <td>Buttons</td>
                         </tr>
                         {this.state.store.map((order) => {
@@ -45,17 +47,13 @@ class ManagerOrdersDetails extends React.Component {
                                         <table>
                                             <tbody>
                                             <tr>
-                                                <td>ShutterID</td>
                                                 <td>Height*Width</td>
                                                 <td>Color</td>
                                                 <td>Type</td>
-                                                <td>Status</td>
-                                                <td>{order.status}</td>
                                             </tr>
                                             {order['shutter'].map((shutter) => {
                                                 return (
                                                     <tr key={shutter.shutterID}>
-                                                        <td>{shutter.shutterID}</td>
                                                         <td>{shutter.height}*{shutter.width}</td>
                                                         <td>{shutter.color}</td>
                                                         <td>{shutter.type}</td>
@@ -66,12 +64,13 @@ class ManagerOrdersDetails extends React.Component {
                                             </tbody>
                                         </table>
                                     </td>
-                                    <button className="btn-info"
+                                    <td>{order.status}</td><td> {order.payment}</td>
+                                    <button className="btn btn-info m-2 p-2"
                                             onClick={() => ManagerAction.install(order._id)}>Install
                                     </button>
                                     <button
                                         id="submit"
-                                        className="btn-success"
+                                        className="btn btn-success m-2 p-2"
                                         onClick={() =>
                                             ManagerAction.invoice(order._id)
                                         }>
