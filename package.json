@@ -16,14 +16,18 @@
     "flux": "^3.1.3",
     "bootstrap": "^4.3.1",
     "node-sass": "^4.12.0",
-    "react-minimal-pie-chart": "^4.0.0"
+    "react-minimal-pie-chart": "^4.0.0",
+    "mocha": "~3.5.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "sinon": "^7.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "shutter":"node src/backend/server.js & npm run start"
+    "shutter": "node src/backend/server.js & npm run start"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -26,11 +26,10 @@ CustomerService.prototype.list = function (callback) {
 }
 CustomerService.prototype.registerCustomer = function (customer, succes, error) {
     var customerID = uniqID.generateUUID('xxxx', 10)();
-
-    this.dao.piece({"_id": customerID}, 'customers', (piece) => {
+    this.dao.piece({"customer.name": customer.customer.name.toString()}, 'customers', (piece) => {
         if (piece !== 0) {
             logger.error(`${customer.customer.name} is alreadyin use`);
-            error("This customer _id is already in use! Try again")
+            error("This customer name is already in use! Try again")
         } else {
             customer['_id'] = customerID
             this.dao.insert('customers', customer, (inserted) => {

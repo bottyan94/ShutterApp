@@ -31,7 +31,7 @@ router.post('/registerCustomer', (req, res) => {
             res.status(200).send(inserted)
         },
         (error) => {
-            res.status(400).send({error})
+            res.status(400).send(error)
         })
 })
 router.post('/addShutter', (req, res) => {
