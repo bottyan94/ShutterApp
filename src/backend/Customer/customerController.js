@@ -13,68 +13,75 @@ router.get('/list', (req, res) => {
         res.status(200).send(requests)
     })
 })
-router.get('/ownOrders', (req, res) => {
-    customerService.ownOrders(req.query['customerID'], (request) => {
-        res.status(200).send(request)
-    })
-})
-
-//TODO EMAIL AND PHONE VALIDATION
 router.post('/registerCustomer', (req, res) => {
-    if (req.body[`customer`][`name`] == undefined || req.body[`customer`][`name`] === "") {
-        res.status(414).send("Name must be defined")
+    if (req.body[`customer`][`name`] === undefined || req.body[`customer`][`name`] === "") {
+        res.status(414).send("Name must be defined");
         return
     }
-    if (req.body[`customer`][`email`] == undefined || req.body[`customer`][`email`] === "") {
-        res.status(414).send("Email must be defined")
+    if (req.body[`customer`][`email`] === undefined || req.body[`customer`][`email`] === "") {
+        res.status(414).send("Email must be defined");
         return
     }
-    if (req.body[`customer`][`birth`] == undefined || req.body[`customer`][`birth`] === "") {
-        res.status(414).send("Birth must be defined")
+    if (req.body[`customer`][`birth`] === undefined || req.body[`customer`][`birth`] === "") {
+        res.status(414).send("Birth must be defined");
         return
     }
-
-    customerService.registerCustomer(req.body, (request) => {
-        res.status(200).send(request)
-    })
-
-})
-
-router.post('/addWindow', (req, res) => {
-    if (req.body[`windows`][`window`][`height`] == undefined || req.body[`windows`][`window`][`height`] === "" || req.body[`windows`][`window`][`height`] < 20) {
-        res.status(414).send("Window Height must be defined or too small this size")
-        return
-    }
-    if (req.body[`windows`][`window`][`width`] == undefined || req.body[`windows`][`window`][`width`] === "" || req.body[`windows`][`window`][`width`] < 20) {
-        res.status(414).send("Window Width must be defined or too small this size")
-        return
-    }
-    customerService.addWindow(req.body)
-    res.status(200).send(req.body)
-})
-router.post('/addShutter', (req, res) => {
-    /*  if (req.body[`shutter`][`height`] == undefined || req.body[`shutter`][`height`] === "" || req.body[`shutter`][`height`] < 20) {
-          res.status(414).send("Window Height must be defined or too small this size")
-          return
-      }
-      if (req.body[`shutter`][`width`] == undefined || req.body[`shutter`][`width`] === "" || req.body[`shutter`][`width`] < 20) {
-          res.status(414).send("Window Width must be defined or too small this size")
-          return
-      }*/
-    customerService.addShutter(req.body,
-        (request) =>{
-            res.status(200).send(request)
+    customerService.registerCustomer(req.body,
+        (inserted) => {
+            res.status(200).send(inserted)
         },
-        (cause) => {
-            res.status(400).send(cause)
+        (error) => {
+            res.status(400).send({error})
         })
 })
-
-
-router.post('/submit', (req, res) => {
-    customerService.submit(req.body.orderID, (request) => {
-        res.status(200).send(request)
+router.post('/addShutter', (req, res) => {
+    if (req.body[`shutter`][`height`] == undefined || req.body[`shutter`][`height`] === "") {
+        res.status(414).send("shutter Height must be defined or too small this size")
+        return
+    }
+    if (req.body[`shutter`][`width`] == undefined || req.body[`shutter`][`width`] === "") {
+        res.status(414).send("shutter Width must be defined or too small this size")
+        return
+    }
+    if (req.body[`shutter`][`color`] == undefined || req.body[`shutter`][`color`] === "") {
+        res.status(414).send("shutter color must be defined")
+        return
+    }
+    if (req.body[`shutter`][`type`] == undefined || req.body[`shutter`][`type`] === "") {
+        res.status(414).send("shutter type must be defined")
+        return
+    }
+    customerService.addShutter(req.body,
+        (request) => {
+            res.status(200).send(request)
+        },
+        (error) => {
+            res.status(400).send( error)
+        })
+})
+router.get('/ownOrders/:customerID', (req, res) => {
+    customerService.ownOrders(req.params['customerID'], (orders) => {
+        res.status(200).send(orders)
     })
+})
+router.get('/submit/:orderID', (req, res) => {
+    customerService.submit(req.params['orderID'],
+        (submitted) => {
+            res.status(200).send(submitted)
+        },
+        (error) => {
+            res.status(400).send(error)
+        })
+})
+router.get('/invoice/:orderID', (req, res) => {
+    customerService.invoice(req.params['orderID'],
+        (invoice) => {
+            console.log(invoice);
+            res.status(200).send(invoice)
+        },
+        (error) => {
+            res.status(400).send(error)
+        })
 })
 
 module.exports = router;

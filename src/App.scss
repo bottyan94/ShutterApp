@@ -1,0 +1,26 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+:root {
+  --myGold: #d8a721;
+  --myDark: #252118;
+}
+
+.myNavbar {
+  background-color: var(--myDark);
+  color: var(--myGold);
+}
+
+.submenu {
+  color: var(--myDark);
+  background-color: var(--myGold);
+}
+.submenu:active {
+  background-color: var(--myDark);
+  color: var(--myGold);
+}
+.buttonsMenu {
+  cursor: pointer;
+}
+.statusText{
+  color: var(--myGold);
+}
