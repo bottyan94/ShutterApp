@@ -6,7 +6,6 @@ class ManagerCustomersList extends React.Component {
 
     constructor(props) {
         super(props);
-        ManagerAction.listCustomers();
         this._onChange = this._onChange.bind(this);
         this.state = {customers: []};
     }
@@ -26,7 +25,8 @@ class ManagerCustomersList extends React.Component {
     render() {
         return (
             <>
-                <div className="card">
+                <div className="row">
+                <div className="card col-3">
                     <div className="card-header">Customers</div>
                     <div className="card-body">
                         <ul className="list-group">
@@ -44,7 +44,10 @@ class ManagerCustomersList extends React.Component {
                             }
                         </ul>
                     </div>
+
                     <div className="card-footer"></div>
+                </div>
+                <div className="col-9" id="ownOrders"></div>
                 </div>
             </>
         )

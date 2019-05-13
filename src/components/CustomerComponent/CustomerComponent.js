@@ -4,20 +4,20 @@ import CustomerStore from "../../store/CustomerStore";
 import CustomerAdd from "./CustomerAdd";
 import CustomerList from "./CustomerList";
 import OrdersDetails from "./OrdersDetails";
-import WorkerComponent from "../WorkerComponent/WorkerComponent";
 import AddOrders from "./AddOrders";
-import ManagerStore from "../../store/ManagerStore";
+
 
 class CustomerComponent extends React.Component {
     constructor(props) {
         super(props);
-        CustomerActions.listCustomers();
+        // CustomerActions.listCustomers();
         this._onChange = this._onChange.bind(this);
         this.state = {customers: []};
     }
 
     _onChange() {
         this.setState({customers: CustomerStore._stores});
+
     }
 
     componentDidMount() {
@@ -31,24 +31,36 @@ class CustomerComponent extends React.Component {
     render() {
         return (
             <>
-                <div className="container-fluid" id="cust">
+
+                <button onClick={() => {
+                    CustomerActions.showReg();
+                }} className="buttonsMenu submenu btn shadow-lg  m-3">AddCustomer
+                </button>
+                <button onClick={() => {
+                    CustomerActions.showCustomersList();
+                    CustomerActions.listCustomers();
+                    CustomerActions.listOrders();
+                }} className="buttonsMenu submenu btn shadow-lg m-3">ListCustomers
+                </button>
+                <button onClick={() => {
+                    CustomerActions.showAddOrder();
+                }} className="buttonsMenu submenu btn shadow-lg m-3">Add Order
+                </button>
+
+                <div className="container-fluid" id="customerContainer">
                     <div className="row">
-                        <div className="col4">
-                            <CustomerAdd/>
-                        </div>
+                        <div className="col-4" id="ccLeft"></div>
                         <div className="col-8">
-                            <AddOrders/>
+                            <div className="row">
+                                <div className="col" id="ccRight"></div>
+                            </div>
+                            <div className="row">
+                                <div className="col" id="ccBig"></div>
+                            </div>
                         </div>
+
                     </div>
 
-                    <div className="row">
-                        <div className="col-3">
-                            <CustomerList/>
-                        </div>
-                        <div className="col-9" id="ownOrders">
-                            <OrdersDetails/>
-                        </div>
-                    </div>
 
                 </div>
             </>

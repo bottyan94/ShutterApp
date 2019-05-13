@@ -7,6 +7,24 @@ class CustomerActions {
             payload: null
         });
     }
+    showReg() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "showReg",
+            payload: null
+        });
+    }
+    showCustomersList() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "showCustomersList",
+            payload: null
+        });
+    }
+    showAddOrder() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "showAddOrder",
+            payload: null
+        });
+    }
     listCustomers() {
         ShutterDispatcher.handleViewAction({
             actionType: "listCustomers",

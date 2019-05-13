@@ -65,7 +65,7 @@ managerService.prototype.invoice = function (orderID, callback) {
             invoice['payment'] = false
             console.log(obj[0])
             this.dao.insert('invoice', invoice, () => {
-                this.dao.update('orders',{"_id": orderID},{$set:{"invoice":invoiceID}}, () => {
+                this.dao.update('orders', {"_id": orderID}, {$set: {"invoice": invoiceID}}, () => {
                     logger.info(`${invoiceID} invoice has inserted to invoice table!`)
                     callback(invoice)
                 })
@@ -73,6 +73,27 @@ managerService.prototype.invoice = function (orderID, callback) {
         })
     })
 }
+managerService.prototype.stat = function (callback) {
+    var obj = {}
+    this.dao.piece({}, "orders", (piece) => {
+        obj['allOrders'] = piece;
+        this.dao.piece({"status": "installed"}, "orders", (piece) => {
+            obj['installed'] = piece;
+            this.dao.piece({"status": "finished"}, "orders", (piece) => {
+                obj['finished'] = piece;
+                this.dao.piece({"status": "submitted"}, "orders", (piece) => {
+                    obj['submitted'] = piece;
+                    this.dao.piece({"status": "added"}, "orders", (piece) => {
+                        obj['added'] = piece;
+                        //console.log(obj)
+                        callback(obj)
+                    })
+                })
+            })
+        })
+    })
+}
+
 
 
 module.exports = managerService;

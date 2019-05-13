@@ -1,6 +1,30 @@
 import ShutterDispatcher from '../dispatcher/ShutterDispatcher';
 
 class ManagerAction {
+    showManager() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "showManager",
+            payload: null
+        });
+    }
+    showCustomersList() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "showCustomersListManager",
+            payload: null
+        });
+    }
+    showOrdersAll() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "showOrdersAll",
+            payload: null
+        });
+    }
+    showStat() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "showStat",
+            payload: null
+        });
+    }
     listCustomers() {
         ShutterDispatcher.handleViewAction({
             actionType: "listCustomersManager",
@@ -29,6 +53,12 @@ class ManagerAction {
         ShutterDispatcher.handleViewAction({
             actionType: "invoice",
             payload: orderID
+        });
+    }
+    stat() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "stat",
+            payload: null
         });
     }
 

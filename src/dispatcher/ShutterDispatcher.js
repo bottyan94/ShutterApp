@@ -4,17 +4,22 @@ import ReactDOM from 'react-dom'
 
 import CustomersStore from '../store/CustomerStore';
 import OrdersDetails from '../components/CustomerComponent/OrdersDetails';
-import CustomerActions from "../actions/CustomerActions";
 import AddOrders from "../components/CustomerComponent/AddOrders";
 import WorkerStore from "../store/WorkerStore";
-import WorkerActions from "../actions/WorkerActions";
 import ManagerStore from "../store/ManagerStore";
 import CustomerComponent from "../components/CustomerComponent/CustomerComponent";
 import CustomerAdd from "../components/CustomerComponent/CustomerAdd";
 import WorkerComponent from "../components/WorkerComponent/WorkerComponent";
 import ManagerComponent from "../components/ManagerComponent/ManagerComponent";
-import ManagerAction from "../actions/ManagerAction";
 import ManagerOrdersDetails from "../components/ManagerComponent/ManagerOrdersDetails";
+import CustomerList from "../components/CustomerComponent/CustomerList";
+import ManagerCustomersList from "../components/ManagerComponent/ManagerCustomersList";
+import ManagerOrdersList from "../components/ManagerComponent/ManagerOrdersList";
+import ManagerStat from "../components/ManagerComponent/ManagerStat";
+import WorkerActions from "../actions/WorkerActions";
+import CustomerActions from "../actions/CustomerActions";
+import ManagerActions from "../actions/ManagerAction"
+
 
 class ShutterDispatcher extends Dispatcher {
     handleViewAction(action) {
@@ -37,13 +42,13 @@ shutterDispatcher.register((data) => {
             "Accept": "application/json"
         }
     }).then(response => {
-        // console.log(response)
         return response.json()
     })
         .then(result => {
             CustomersStore._customers = result;
             CustomersStore.emitChange();
         });
+    CustomersStore.emitChange();
 });
 //customer/listOwnOrders
 shutterDispatcher.register((data) => {
@@ -64,7 +69,7 @@ shutterDispatcher.register((data) => {
     });
     ReactDOM.render(
         React.createElement(OrdersDetails),
-        document.getElementById('ownOrders'),
+        document.getElementById('ccBig'),
     );
 
     CustomersStore.emitChange();
@@ -80,7 +85,9 @@ shutterDispatcher.register((data) => {
             "Accept": "application/json"
         }
     }).then(() => {
+      //  CustomersStore._selectedCustomer=data.payload.payload
         CustomerActions.listOrders(CustomersStore._selectedCustomer)
+        CustomersStore.emitChange();
     })
 });
 //customer/invoice
@@ -96,8 +103,8 @@ shutterDispatcher.register((data) => {
     }).then(response => {
         return response.text()
     }).then((result) => {
-        alert("<h1>Számla</h1>\n Név: "+result)
-        CustomerActions.listOrders(CustomersStore._selectedCustomer)
+        alert(result)
+        CustomersStore.emitChange()
     })
 });
 //customer/register
@@ -105,9 +112,6 @@ shutterDispatcher.register((data) => {
     if (data.payload.actionType !== "addCustomer") {
         return;
     }
-    console.log(data.payload.payload);
-    console.log(JSON.stringify(data.payload.payload));
-
     fetch('/customer/registerCustomer', {
         method: 'POST',
         headers: {
@@ -119,21 +123,17 @@ shutterDispatcher.register((data) => {
             return response.text()
         })
         .then((result) => {
-            console.log(result)
-            CustomerActions.listCustomers();
+            alert(result)
+            CustomersStore.emitChange();
         })
-
-    //console.log(data.payload.payload);
+    CustomersStore.emitChange();
 });
 //customer/addShutter
 shutterDispatcher.register((data) => {
     if (data.payload.actionType !== "addOrders") {
         return;
     }
-    console.log(data.payload.payload);
-    console.log(JSON.stringify(data.payload.payload));
-
-    fetch('/customer/addShutter', {
+  fetch('/customer/addShutter', {
         method: 'POST',
         headers: {
             "Content-Type": 'application/json'
@@ -143,13 +143,15 @@ shutterDispatcher.register((data) => {
         .then((response) => {
             return response.text()
         })
-        .then(() => {
-            CustomerActions.listOrders(CustomersStore._selectedCustomer);
+        .then((result) => {
             CustomersStore._shutters = [];
+            CustomersStore._selectedCustomer = data.payload.payload.customer.customerID;
+            alert(result)
             CustomersStore.emitChange();
         })
     CustomersStore.emitChange();
 });
+
 //worker list part
 shutterDispatcher.register((data) => {
     if (data.payload.actionType !== "listPart") {
@@ -217,7 +219,6 @@ shutterDispatcher.register((data) => {
         // WorkerStore._selectedCustomer = data.payload.payload
         WorkerActions.listOrders();
         WorkerStore.emitChange();
-        // document.getElementById("select").disabled=true;
     });
     WorkerStore.emitChange();
 });
@@ -241,6 +242,7 @@ shutterDispatcher.register((data) => {
     });
     WorkerStore.emitChange();
 })
+
 //manager/list all customer
 shutterDispatcher.register((data) => {
     if (data.payload.actionType !== "listCustomersManager") {
@@ -273,7 +275,6 @@ shutterDispatcher.register((data) => {
         return response.json()
     })
         .then(result => {
-            console.log(ManagerStore._orders)
             ManagerStore._orders = result;
             ManagerStore.emitChange();
         });
@@ -297,7 +298,7 @@ shutterDispatcher.register((data) => {
     });
     ReactDOM.render(
         React.createElement(ManagerOrdersDetails),
-        document.getElementById('ownOrdersManager'),
+        document.getElementById('ownOrders'),
     );
     ManagerStore.emitChange();
 });
@@ -314,9 +315,9 @@ shutterDispatcher.register((data) => {
     }).then(response => {
         return response.text()
     }).then(result => {
-        ManagerStore._selectedOrder = result
-        ManagerAction.listOrders(ManagerStore._selectedOrder)
-
+        // console.log(result)
+        ManagerStore._selectedOrder = data.payload.payload
+        ManagerStore.emitChange();
     })
     ManagerStore.emitChange();
 });
@@ -334,10 +335,28 @@ shutterDispatcher.register((data) => {
     }).then(response => {
         return response.text()
     }).then(() => {
-        ManagerAction.listOwnOrders(ManagerStore._selectedCustomer)
+        ManagerActions.listOwnOrders(ManagerStore._selectedCustomer)
         ManagerStore.emitChange()
     })
 
+});
+//manager/stat
+shutterDispatcher.register((data) => {
+    if (data.payload.actionType !== "stat") {
+        return;
+    }
+    fetch('/manager/stat', {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    }).then(response => {
+        return response.json()
+    })
+        .then(result => {
+            ManagerStore._stat = result;
+            ManagerStore.emitChange();
+        });
 });
 
 //menu customer
@@ -349,6 +368,38 @@ shutterDispatcher.register((data) => {
         React.createElement(CustomerComponent),
         document.getElementById('mainContainer'),
     )
+});
+//reg
+shutterDispatcher.register((data) => {
+    if (data.payload.actionType !== "showReg") {
+        return;
+    }
+    ReactDOM.render(
+        React.createElement(CustomerAdd),
+        document.getElementById('ccLeft'),
+    )
+});
+//customersList show
+shutterDispatcher.register((data) => {
+    if (data.payload.actionType !== "showCustomersList") {
+        return;
+    }
+    ReactDOM.render(
+        React.createElement(CustomerList),
+        document.getElementById('ccLeft'),
+    )
+    CustomersStore.emitChange();
+});
+//Customer add order show
+shutterDispatcher.register((data) => {
+    if (data.payload.actionType !== "showAddOrder") {
+        return;
+    }
+    ReactDOM.render(
+        React.createElement(AddOrders),
+        document.getElementById('ccRight'),
+    )
+    CustomersStore.emitChange();
 });
 //menu worker
 shutterDispatcher.register((data) => {
@@ -369,6 +420,39 @@ shutterDispatcher.register((data) => {
         React.createElement(ManagerComponent),
         document.getElementById('mainContainer'),
     )
+});
+//manager show customers
+shutterDispatcher.register((data) => {
+    if (data.payload.actionType !== "showCustomersListManager") {
+        return;
+    }
+    ReactDOM.render(
+        React.createElement(ManagerCustomersList),
+        document.getElementById('containerManager'),
+    )
+    CustomersStore.emitChange();
+});
+//manager show all orders
+shutterDispatcher.register((data) => {
+    if (data.payload.actionType !== "showOrdersAll") {
+        return;
+    }
+    ReactDOM.render(
+        React.createElement(ManagerOrdersList),
+        document.getElementById('containerManager'),
+    )
+    CustomersStore.emitChange();
+});
+//manager show stat
+shutterDispatcher.register((data) => {
+    if (data.payload.actionType !== "showStat") {
+        return;
+    }
+    ReactDOM.render(
+        React.createElement(ManagerStat),
+        document.getElementById('containerManager'),
+    )
+    CustomersStore.emitChange();
 });
 
 export default shutterDispatcher;

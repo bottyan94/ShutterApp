@@ -28,5 +28,10 @@ router.get('/invoice/:orderID',(req,res)=>{
         res.status(200).send(request)
     })
 })
+router.get('/stat',(req,res)=>{
+    managerService.stat((request)=>{
+        res.status(200).send(request)
+    })
+})
 
 module.exports = router;

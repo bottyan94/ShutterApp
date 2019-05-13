@@ -27,13 +27,15 @@ router.post('/registerCustomer', (req, res) => {
         return
     }
     customerService.registerCustomer(req.body,
-        (inserted) => {res.status(200).send(inserted)},
-        (bcs) => {res.status(400).send(bcs)}
-        )
-
+        (inserted) => {
+            res.status(200).send(inserted)
+        },
+        (error) => {
+            res.status(400).send({error})
+        })
 })
 router.post('/addShutter', (req, res) => {
-    /*if (req.body[`shutter`][`height`] == undefined || req.body[`shutter`][`height`] === "") {
+    if (req.body[`shutter`][`height`] == undefined || req.body[`shutter`][`height`] === "") {
         res.status(414).send("shutter Height must be defined or too small this size")
         return
     }
@@ -48,10 +50,14 @@ router.post('/addShutter', (req, res) => {
     if (req.body[`shutter`][`type`] == undefined || req.body[`shutter`][`type`] === "") {
         res.status(414).send("shutter type must be defined")
         return
-    } */
+    }
     customerService.addShutter(req.body,
-        (request) => {res.status(200).send(request)},
-        (bcs) => {res.status(400).send(bcs)})
+        (request) => {
+            res.status(200).send(request)
+        },
+        (error) => {
+            res.status(400).send( error)
+        })
 })
 router.get('/ownOrders/:customerID', (req, res) => {
     customerService.ownOrders(req.params['customerID'], (orders) => {
@@ -60,13 +66,22 @@ router.get('/ownOrders/:customerID', (req, res) => {
 })
 router.get('/submit/:orderID', (req, res) => {
     customerService.submit(req.params['orderID'],
-        (submitted) => {res.status(200).send(submitted)},
-        (error) => {res.status(400).send("u cant do thath")})
+        (submitted) => {
+            res.status(200).send(submitted)
+        },
+        (error) => {
+            res.status(400).send(error)
+        })
 })
 router.get('/invoice/:orderID', (req, res) => {
     customerService.invoice(req.params['orderID'],
-        (invoice) => {console.log(invoice);res.status(200).send(invoice)},
-        (error) => {res.status(400).send(error)})
+        (invoice) => {
+            console.log(invoice);
+            res.status(200).send(invoice)
+        },
+        (error) => {
+            res.status(400).send(error)
+        })
 })
 
 module.exports = router;

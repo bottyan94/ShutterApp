@@ -3,7 +3,8 @@ import {EventEmitter} from 'events'
 class ManagerStore extends EventEmitter{
 
     _orders = [];
-    _customers=[]
+    _customers=[];
+    _stat=null;
     _selectedOrder = null;
     _selectedCustomer=null
 

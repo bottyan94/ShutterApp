@@ -8,7 +8,6 @@ class WorkerComponent extends React.Component {
 
     constructor(props) {
         super(props);
-        WorkerActions.listOrders();
         this._onChange = this._onChange.bind(this);
         this.state = {orders: []};
     }
@@ -26,20 +25,15 @@ class WorkerComponent extends React.Component {
     }
 
     render() {
-        // console.log("bentvagyok")
         return (
             <>
-                <div className="container-fluid" id="work">
-                    <div className="card">
+                <div className="container-fluid " id="work">
+                    <div className="card mt-5">
                         <div className="card-header">Orders</div>
                         <div className="card-body">
                             <ul className="list-group">
-
-
                                 <table className="table table-bordered, table-striped">
                                     <caption>Store Details</caption>
-
-
                                     {this.state.orders !== undefined && this.state.orders !== null &&
                                     <tbody>
                                     <tr>
@@ -71,13 +65,19 @@ class WorkerComponent extends React.Component {
                                                                     <td>{shutter.type}</td>
                                                                     <td>{shutter.status}</td>
                                                                     <td>
-                                                                        <button className="btn-info" id="select"
-                                                                                onClick={() => WorkerActions.select(shutter.shutterID)}>Select
+                                                                        <button className="btn btn-info" id="select"
+                                                                                onClick={() => {
+                                                                                    WorkerActions.select(shutter.shutterID);
+                                                                                    /*WorkerActions.listOrders();*/
+                                                                                }}>Select
                                                                         </button>
                                                                     </td>
                                                                     <td>
-                                                                        <button className="btn-info" id="parts"
-                                                                                onClick={() => WorkerActions.listParts(shutter.shutterID)}>Parts
+                                                                        <button className="btn btn-info" id="parts"
+                                                                                onClick={() => {
+                                                                                    WorkerActions.listParts(shutter.shutterID);
+                                                                                   /* WorkerActions.listOrders()*/
+                                                                                }}>Parts
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -86,9 +86,9 @@ class WorkerComponent extends React.Component {
                                                         </tbody>
                                                     </table>
                                                 </td>
-                                                <td>{order.status}</td>
+                                                <td className="statusText font-weight-bolder font-italic text-uppercase">{order.status}</td>
                                                 <td>
-                                                    <button className="btn-success" id="finish"
+                                                    <button className="btn submenu" id="finish"
                                                             onClick={() => WorkerActions.finish(order._id)}>Finish
                                                     </button>
                                                 </td>

@@ -6,8 +6,6 @@ class CustomerAdd extends React.Component {
 
     constructor(props) {
         super(props);
-        // CustomerActions.fetchRatings();
-        // CustomerActions.fetchCategories();
         this._onChange = this._onChange.bind(this);
         this.state = {
             customer: {
@@ -35,7 +33,7 @@ class CustomerAdd extends React.Component {
         return (<>
 
 
-                    <div className="card">
+                    <div className="card shadow-lg">
                         <div className="card-header">Register Customer</div>
                         <div className="card-body">
                             <div className="row">
@@ -76,9 +74,9 @@ class CustomerAdd extends React.Component {
                                     <button
                                         onClick={() => {
                                             CustomerActions.addCustomer(this.state);
-                                            console.log(this.state)
+                                            CustomerActions.listCustomers();
                                         }}
-                                        className="btn btn-success m-3">
+                                        className="btn submenu m-3">
                                         Add
                                     </button>
                                 </div>

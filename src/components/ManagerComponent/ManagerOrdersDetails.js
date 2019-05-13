@@ -35,6 +35,7 @@ class ManagerOrdersDetails extends React.Component {
                         <tr>
                             <td>OrderID</td>
                             <td>Shutters</td>
+                            <td>Buttons</td>
                         </tr>
                         {this.state.store.map((order) => {
                             return (
@@ -65,16 +66,18 @@ class ManagerOrdersDetails extends React.Component {
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td>
-                                        <button className="btn-success"
-                                                onClick={() => ManagerAction.install(order._id)}>Install
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button id="submit" className="btn-success"
-                                                onClick={() => ManagerAction.invoice(order._id)}>CreateInvoince
-                                        </button>
-                                    </td>
+                                    <button className="btn-info"
+                                            onClick={() => ManagerAction.install(order._id)}>Install
+                                    </button>
+                                    <button
+                                        id="submit"
+                                        className="btn-success"
+                                        onClick={() =>
+                                            ManagerAction.invoice(order._id)
+                                        }>
+                                        CreateInvoince
+                                    </button>
+
                                 </tr>
                             )
                         })}

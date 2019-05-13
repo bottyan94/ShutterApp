@@ -7,7 +7,6 @@ class ManagerOrdersList extends React.Component {
 
     constructor(props) {
         super(props);
-        ManagerAction.listOrders();
         this._onChange = this._onChange.bind(this);
         this.state = {orders: []};
     }
@@ -73,20 +72,25 @@ class ManagerOrdersList extends React.Component {
                                                     </tbody>
                                                 </table>
                                             </td>
-                                            <td>{order.status}</td>
+                                            <td className="statusText font-weight-bolder font-italic text-uppercase">{order.status}</td>
                                             <td>
+                                            <tr>
                                                 <td>
-                                                    <button className="btn-info" id="select"
+                                                    <button className="btn btn-info" id="select"
                                                             onClick={() => ManagerAction.install(order._id)}>Install
                                                     </button>
                                                 </td>
+                                            </tr>
+                                            <tr>
                                                 <td>
-                                                    <button className="btn-info" id="parts"
-                                                            onClick={() => ManagerAction.invoice(order._id)}>Creat Invoice
+                                                    <button className="btn btn-info" id="parts"
+                                                            onClick={() => ManagerAction.invoice(order._id)}>Creat
+                                                        Invoice
                                                     </button>
                                                 </td>
-                                            </td>
+                                            </tr></td>
                                         </tr>
+
                                     )
                                 })}
                                 </tbody>

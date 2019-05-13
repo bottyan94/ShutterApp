@@ -25,7 +25,7 @@ class CustomerList extends React.Component {
     render() {
         return (
 <>
-            <div className="card">
+            <div className="card shadow-lg">
                 <div className="card-header">Customers</div>
                 <div className="card-body">
                     <ul className="list-group">
@@ -34,7 +34,7 @@ class CustomerList extends React.Component {
                                 return (
                                     <li key={customer._id}
                                         className="list-group-item"
-                                        onClick={() => CustomerActions.listOrders(customer._id)}>
+                                        onClick={() => {(CustomerActions.listOrders(customer._id));}}>
                                         {customer._id},<br/>
                                         {customer.customer.name}<br/>
                                         {customer.customer.email}, {customer.customer.birth}

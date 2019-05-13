@@ -1,6 +1,12 @@
 import ShutterDispatcher from '../dispatcher/ShutterDispatcher';
 
 class WorkerActions {
+    showWorker() {
+        ShutterDispatcher.handleViewAction({
+            actionType: "showWorker",
+            payload: null
+        });
+    }
     listOrders() {
         ShutterDispatcher.handleViewAction({
             actionType: "listOrders",

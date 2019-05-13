@@ -41,8 +41,7 @@ class AddOrders extends React.Component {
     render() {
         return (
             <>
-
-                        <div className="card">
+                        <div className="card shadow-lg">
                             <div className="card-header">Add shutter</div>
                             <div className="card-body">
                                 <div className="row">
@@ -56,7 +55,7 @@ class AddOrders extends React.Component {
                                                         this.shut.height = event.target.value
                                                         this.setState({shut: this.shut.height});
                                                     }}
-                                                    type="text"/>
+                                                    type="number"/>
                                             </div>
                                         </div>
                                         <div className="row m-2">
@@ -67,10 +66,9 @@ class AddOrders extends React.Component {
                                                         this.shut.width = event.target.value
                                                         this.setState({shut: this.shut.width});
                                                     }}
-                                                    type="text"/>
+                                                    type="number"/>
                                             </div>
                                         </div>
-
                                         <div className="row m-2">
                                             <div className="col-4">Color</div>
                                             <div className="col-8">
@@ -117,15 +115,22 @@ class AddOrders extends React.Component {
                                                     type: this.shut.type
                                                 })
                                             }}
-                                            className="btn btn-success m-3">
+                                            className="btn submenu m-3">
                                             Add shutter
                                         </button>
                                         <button
                                             onClick={() => {
                                                 CustomerActions.addOrders(this.state);
                                             }}
-                                            className="btn btn-success m-3">
+                                            className="btn submenu m-3">
                                             Finish orders
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                CustomerActions.listOrders(CustomerStore._selectedCustomer);
+                                            }}
+                                            className="btn submenu m-3">
+                                            Refresh
                                         </button>
                                     </div>
                                 </div>
