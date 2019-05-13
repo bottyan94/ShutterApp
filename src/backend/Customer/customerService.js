@@ -96,11 +96,11 @@ CustomerService.prototype.pay = function (orderID, succes, error) {
     var mit = {"_id": orderID}
     var mire = {$set: {"payment": "paid"}}
     this.dao.read(mit, "orders", (order) => {
-        console.log(order)
+       // console.log(order)
         if (order[0].payment === "waiting" && order[0].status==="installed") {
             this.dao.update("orders", mit, mire, () => {
                 logger.info(`${orderID} payment was changed`)
-                succes()
+                succes(order[0].customer.customerID)
             })
         } else {
             logger.error(`${orderID}not ready to paid`);

@@ -119,8 +119,9 @@ shutterDispatcher.register((data) => {
             "Accept": "application/json"
         }
     }).then(response => {
-        return response.json()
-    }).then(() => {
+        return response.text()
+    }).then((res) => {
+        CustomerActions.listOrders(CustomersStore._selectedCustomer)
         CustomersStore.emitChange()
     })
 });

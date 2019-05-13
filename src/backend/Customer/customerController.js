@@ -69,11 +69,12 @@ router.get('/invoice/:orderID', (req, res) => {
 })
 router.get('/pay/:orderID', (req, res) => {
     customerService.pay(req.params['orderID'],
-        (pay) => {
-            console.log(pay);
-            res.status(200).send(pay)
+        (customerID) => {
+            console.log(customerID);
+            res.status(200).send(customerID)
         },
         (error) => {
+            console.log(error);
             res.status(400).send(error)
         })
 })
