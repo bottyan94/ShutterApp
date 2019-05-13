@@ -1,0 +1,1 @@
+{"_id":"2891","customer":"Bottyán Tamás","shutter":[{"height":"150","width":"150","color":"Black","status":"done","type":"expensive","shutterID":"4422"}],"partsList":[[{"_id":{"$oid":"5cd1bbfc3a3100959ac2891c"},"id":2,"type":"expensive","parts":[{"case":1,"guideRail":2,"strap":1,"box":1,"lowerRail":1,"price":100}]}]],"summ":0,"payment":false}

@@ -1,0 +1,3 @@
+{"_id":"3255","customer":{"name":"Bottyán Tamás","email":"bottyan94@gmail.com","birth":"1994.08.03","ordersID":["9203","1081","9240","6619"]}}
+{"_id":"7204","customer":{"name":"Almási Lilla","email":"almalilla96@gmail.com","birth":"1996.08.19","ordersID":["5821","8072","1623"]}}
+{"_id":"0395","customer":{"name":"Teszt User","email":"teszt@gmail.com","birth":"2000.01.01.","ordersID":[]}}

@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5cd1bbd63a3100959ac2891b"},"id":1.0,"type":"cheap","parts":[{"case":1.0,"guideRail":2.0,"strap":1.0,"box":1.0,"lowerRail":1.0,"price":10.0}]}
+{"_id":{"$oid":"5cd1bbfc3a3100959ac2891c"},"id":2.0,"type":"expensive","parts":[{"case":1.0,"guideRail":2.0,"strap":1.0,"box":1.0,"lowerRail":1.0,"price":100.0}]}

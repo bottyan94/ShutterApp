@@ -65,10 +65,8 @@ class OrdersDetails extends React.Component {
                                                     </tr>
                                                 );
                                             })}
-                                            </tbody>
                                             <tr>
-                                                <td>
-                                                    <tr className="text-center statusText font-weight-bolder font-italic text-uppercase">{order.status}</tr>
+                                                <td className="text-center statusText font-weight-bolder font-italic text-uppercase">{order.status}
 
                                                 </td>
                                                 <td>
@@ -82,6 +80,7 @@ class OrdersDetails extends React.Component {
                                                     </button>
                                                 </td>
                                             </tr>
+                                        </tbody>
                                         </table>
                                     </td>
                                 </tr>
