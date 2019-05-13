@@ -40,11 +40,39 @@ describe('Customer OwnOrders',  ()=> {
               done();
           });
     })
-    it('should be return status 200',(done)=>{
+    it('should be return status 414, if req.body undefined',(done)=>{
         chai.request(server)
             .post('/customer/registerCustomer')
             .send({"customer":{
                     "name":"Test",
+                    "email":"",
+                    "birth":"2000.01.01",
+                    "ordersID":[]
+                }})
+            .end(function(err, res) {
+                res.should.have.status(414)
+                done();
+            });
+    })
+    it('should be return status 414, if req.body undefined',(done)=>{
+        chai.request(server)
+            .post('/customer/registerCustomer')
+            .send({"customer":{
+                    "name":"Test",
+                    "email":"test@gmail.com",
+                    "birth":"",
+                    "ordersID":[]
+                }})
+            .end(function(err, res) {
+                res.should.have.status(414)
+                done();
+            });
+    })
+    it('should be return status 200',(done)=>{
+        chai.request(server)
+            .post('/customer/registerCustomer')
+            .send({"customer":{
+                    "name":"wtf",        // <=need a name
                     "email":"test@gmail.com",
                     "birth":"2000.01.01",
                     "ordersID":[]
@@ -54,7 +82,7 @@ describe('Customer OwnOrders',  ()=> {
                 done();
             });
     })
-    /*it('should be return status 400, if name is already in use',(done)=>{
+    it('should be return status 400, if name is already in use',(done)=>{
         chai.request(server)
             .post('/customer/registerCustomer')
             .send({"customer":{
@@ -67,5 +95,5 @@ describe('Customer OwnOrders',  ()=> {
                 res.should.have.status(400)
                 done();
             });
-    })*/
+    })
 });
