@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha backend/Test/",
     "eject": "react-scripts eject",
     "shutter": "node backend/server.js & npm run start"
   },

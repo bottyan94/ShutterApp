@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="860c612a-f16d-46d0-82ba-f7622c428ddf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Test/CustomerTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Test/CustomerTest.js" afterDir="false" />
-    </list>
+    <list default="true" id="860c612a-f16d-46d0-82ba-f7622c428ddf" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -64,7 +61,7 @@
     <session id="-2012585205">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -84,18 +81,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="25254" />
+          <entry key="js" value="25261" />
           <entry key="json" value="282" />
           <entry key="scss" value="182" />
           <entry key="sh" value="62" />
-          <entry key="txt" value="199" />
+          <entry key="txt" value="202" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="282" />
-          <entry key="JavaScript" value="25254" />
-          <entry key="PLAIN_TEXT" value="261" />
+          <entry key="JavaScript" value="25261" />
+          <entry key="PLAIN_TEXT" value="264" />
           <entry key="SCSS" value="182" />
         </counts>
       </usages-collector>
@@ -164,10 +161,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/ManagerComponent/ManagerOrdersList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1290">
+            <state relative-caret-position="577">
               <caret line="88" column="60" selection-start-line="88" selection-start-column="60" selection-end-line="88" selection-end-column="60" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -179,8 +176,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/CustomerComponent/OrdersDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1320">
-              <caret line="90" selection-start-line="90" selection-end-line="90" />
+            <state relative-caret-position="210">
+              <caret line="55" column="58" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -230,7 +227,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/Test/CustomerTest.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
@@ -337,13 +334,13 @@
         <option value="$PROJECT_DIR$/src/backend/mongoDB/orders.json" />
         <option value="$PROJECT_DIR$/src/components/ManagerComponent/ManagerOrdersDetails.js" />
         <option value="$PROJECT_DIR$/src/actions/CustomerActions.js" />
-        <option value="$PROJECT_DIR$/src/components/CustomerComponent/OrdersDetails.js" />
         <option value="$PROJECT_DIR$/src/components/ManagerComponent/ManagerOrdersList.js" />
         <option value="$PROJECT_DIR$/src/backend/Customer/customerService.js" />
         <option value="$PROJECT_DIR$/src/backend/Customer/customerController.js" />
         <option value="$PROJECT_DIR$/src/dispatcher/ShutterDispatcher.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/backend/Test/CustomerTest.js" />
+        <option value="$PROJECT_DIR$/src/components/CustomerComponent/OrdersDetails.js" />
       </list>
     </option>
   </component>
@@ -389,6 +386,19 @@
               <item name="ShutterApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="ShutterApp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ShutterApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ShutterApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ShutterApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ShutterApp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="ManagerComponent" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -474,7 +484,7 @@
       <workItem from="1557696576642" duration="4979000" />
       <workItem from="1557702736566" duration="3615000" />
       <workItem from="1557706804072" duration="7427000" />
-      <workItem from="1557754796654" duration="579000" />
+      <workItem from="1557754796654" duration="1180000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit&#10;'/' - hello">
       <created>1556787796067</created>
@@ -560,11 +570,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557754437008</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary=" last modify2.0">
+      <created>1557755433790</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1557755433792</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249383000" />
+    <option name="totallyTimeSpent" value="249984000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -577,6 +594,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21818182" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -621,7 +639,8 @@
     <MESSAGE value="some bugfix" />
     <MESSAGE value="payment added" />
     <MESSAGE value=" last modify" />
-    <option name="LAST_COMMIT_MESSAGE" value=" last modify" />
+    <MESSAGE value=" last modify2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value=" last modify2.0" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/backend/DAO.js" />
@@ -848,26 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ManagerComponent/ManagerOrdersList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="88" column="60" selection-start-line="88" selection-start-column="60" selection-end-line="88" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/CustomerComponent/OrdersDetails.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -906,6 +905,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="74" column="31" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/CustomerComponent/OrdersDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="55" column="58" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ManagerComponent/ManagerOrdersList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="577">
+          <caret line="88" column="60" selection-start-line="88" selection-start-column="60" selection-end-line="88" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
