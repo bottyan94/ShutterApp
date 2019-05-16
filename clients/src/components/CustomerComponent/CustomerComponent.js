@@ -27,6 +27,7 @@ class CustomerComponent extends React.Component {
     render() {
         return (
             <>
+                <div id="alertTest"></div>
                 <button onClick={() => {
                     CustomerActions.showReg();
                 }} className="buttonsMenu submenu btn shadow-lg  m-3">AddCustomer
