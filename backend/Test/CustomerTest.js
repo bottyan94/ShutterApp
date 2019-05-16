@@ -8,8 +8,8 @@ const should = chai.should();
 
 chai.use(chaiHttp)
 
-const service = require('../Customer/customerService');
-const dao = require('../dao')
+const service = require('../Service/customerService');
+const dao = require('../DAO/dao')
 const daoMock = sinon.mock(dao);
 
 const customerService = new service(this.dao);

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var srs = require('./managerService')
+var srs = require('../Service/managerService')
 const managerService = new srs();
 
 router.get('/',(req, res) => {

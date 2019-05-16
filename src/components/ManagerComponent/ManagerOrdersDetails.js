@@ -50,6 +50,7 @@ class ManagerOrdersDetails extends React.Component {
                                                 <td>Height*Width</td>
                                                 <td>Color</td>
                                                 <td>Type</td>
+                                                <td>Status</td>
                                             </tr>
                                             {order['shutter'].map((shutter) => {
                                                 return (

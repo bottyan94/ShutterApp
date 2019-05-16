@@ -5,13 +5,13 @@ const port = 8080
 
 app.use(bodyParser.json());
 
-const customerController = require('./Customer/customerController')
+const customerController = require('./Controller/customerController')
 app.use('/customer', customerController)
 
-const workerController = require('./Worker/workerController')
+const workerController = require('./Controller/workerController')
 app.use('/worker',workerController)
 
-const managerController = require('./Manager/managerController')
+const managerController = require('./Controller/managerController')
 app.use('/manager',managerController)
 
 

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var srs = require('./workerService')
+var srs = require('../Service/workerService')
 const workerService = new srs();
 
 router.get('/', (req, res) => {
@@ -15,8 +15,8 @@ router.get('/listOrders', (req, res) => {
 router.get('/selectShutter/:shutterID', (req, res) => {
   //  console.log(req.params['shutterID'])
     workerService.selectShutter(req.params['shutterID'],
-        (request) => {res.status(200).send(request)},
-            (bcs) => {res.status(400).send(bcs)})
+        (succes) => {res.status(200).send(succes)},
+            (error) => {res.status(400).send(error)})
 })
 router.post('/listParts', (req, res) => {
     workerService.listParts(req.body.orderID,

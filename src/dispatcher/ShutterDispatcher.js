@@ -61,6 +61,8 @@ shutterDispatcher.register((data) => {
             "Accept": "application/json"
         }
     }).then(response => {
+        console.log('asd')
+        console.log(response)
         return response.json()
     }).then(result => {
         CustomersStore._selectedStore = result;
@@ -341,7 +343,7 @@ shutterDispatcher.register((data) => {
 });
 //manager/install
 shutterDispatcher.register((data) => {
-    console.log(data.payload.payload)
+    //console.log(data.payload.payload)
     if (data.payload.actionType !== "install") {
         return;
     }

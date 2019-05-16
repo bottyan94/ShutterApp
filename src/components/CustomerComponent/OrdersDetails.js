@@ -30,10 +30,8 @@ class OrdersDetails extends React.Component {
             <div className="card shadow-lg">
                 <div className="card-header">Orders</div>
                 <div className="card-body">
-                    <table className="table table-bordered table-striped col-8">
+                    <table className="table table-bordered table-striped">
                         <caption>Store Details</caption>
-
-
                         {this.state.store !== undefined && this.state.store !== null &&
                         <tbody>
                         <tr>
@@ -72,25 +70,21 @@ class OrdersDetails extends React.Component {
                                         <td className="text-center statusText font-weight-bolder font-italic text-uppercase">{order.status}
                                         </td>
                                         <tr>
-                                            <td>{order.payment}</td>
-                                        </tr>
-                                        <tr>
-                                            <button id="pay" className="btn btn-success m-2"
-                                                    onClick={() => CustomerActions.pay(order._id)}>Pay
-                                            </button>
+                                            <td className="text-center statusText font-weight-bolder font-italic text-uppercase">{order.payment}</td>
                                         </tr>
                                     </td>
 
 
-                                            <button id="submit" className="btn btn-success m-2"
-                                                    onClick={() => CustomerActions.submit(order._id)}>Submit
-                                            </button>
+                                    <button className="btn btn-success m-2"
+                                            onClick={() => CustomerActions.submit(order._id)}>Submit
+                                    </button>
 
-                                            <button id="submit" className="btn btn-success m-2"
-                                                    onClick={() => CustomerActions.invoice(order._id)}>SeeInvoince
-                                            </button>
-
-
+                                    <button  className="btn btn-success m-2"
+                                            onClick={() => CustomerActions.invoice(order._id)}>SeeInvoince
+                                    </button>
+                                    <button  className="btn btn-success m-2"
+                                            onClick={() => CustomerActions.pay(order._id)}>Pay
+                                    </button>
 
 
                                 </tr>

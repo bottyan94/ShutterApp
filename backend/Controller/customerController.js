@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var srs = require('./customerService')
+var srs = require('../Service/customerService')
 const customerService = new srs()
 
 router.get('/', (req, res) => {
@@ -60,7 +60,7 @@ router.get('/submit/:orderID', (req, res) => {
 router.get('/invoice/:orderID', (req, res) => {
     customerService.invoice(req.params['orderID'],
         (invoice) => {
-            console.log(invoice);
+            //console.log(invoice);
             res.status(200).send(invoice)
         },
         (error) => {
@@ -71,7 +71,7 @@ router.get('/pay/:orderID', (req, res) => {
     customerService.pay(req.params['orderID'],
         (customerID) => {
             console.log(customerID);
-            res.status(200).send(customerID)
+            res.status(200).send()
         },
         (error) => {
             console.log(error);

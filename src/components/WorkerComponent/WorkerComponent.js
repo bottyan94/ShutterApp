@@ -26,7 +26,7 @@ class WorkerComponent extends React.Component {
     render() {
         return (
             <>
-                <div className="container-fluid " id="work">
+                <div className="container-fluid p-2" id="work">
                     <div className="card mt-5">
                         <div className="card-header">Orders</div>
                         <div className="card-body">
@@ -39,6 +39,7 @@ class WorkerComponent extends React.Component {
                                         <td>OrderID</td>
                                         <td>Shutters Info</td>
                                         <td>Order status</td>
+                                        <td>Buttons</td>
                                     </tr>
                                     {this.state.orders.map((order) => {
                                         return (

@@ -31,8 +31,8 @@ class ManagerStat extends React.Component {
     render() {
         return (
             <>
-                <div className="row">
-                    <div className="card col-3">
+                <div className="row d-flex justify-content-center p-2">
+                    <div className="card col-3 p-2">
                         <div className="card-header">Stat</div>
                         <div className="card-body">
                             <ul className="list-group">
@@ -46,7 +46,7 @@ class ManagerStat extends React.Component {
 
                         <div className="card-footer"></div>
                     </div>
-                    <div className="card col-5">
+                    <div className="card col-5 p-2">
                         <div className="card-header">Diagram</div>
                         <div className="card-body">
                             <PieChart className=""
