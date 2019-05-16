@@ -226,8 +226,8 @@ shutterDispatcher.register((data) => {
     if (data.payload.actionType !== "selectShutter") {
         return;
     }
-    console.log("selectshutter")
-    console.log(data.payload.payload)
+   // console.log("selectshutter")
+   // console.log(data.payload.payload)
     fetch('worker/selectShutter/' + data.payload.payload, {
         headers: {
             "Content-Type": "application/json",

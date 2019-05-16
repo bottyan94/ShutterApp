@@ -26,7 +26,7 @@ class ManagerOrdersList extends React.Component {
     render() {
         return (
             <>
-                <div className="card">
+                <div className="card shadow-lg">
                     <div className="card-header">Manager Orders</div>
                     <div className="card-body">
                         <ul className="list-group">

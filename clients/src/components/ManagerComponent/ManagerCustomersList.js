@@ -26,7 +26,7 @@ class ManagerCustomersList extends React.Component {
         return (
             <>
                 <div className="row">
-                <div className="card col-3">
+                <div className="card col-3 shadow-lg">
                     <div className="card-header">Customers</div>
                     <div className="card-body">
                         <ul className="list-group">

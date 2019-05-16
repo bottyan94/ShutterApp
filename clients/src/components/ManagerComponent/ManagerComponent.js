@@ -34,12 +34,12 @@ class ManagerComponent extends React.Component {
                     <button onClick={() => {
                         ManagerAction.showOrdersAll();
                         ManagerAction.listOrders();
-                    }} className="btn submenu m-3 hadow-lg">Show All Orders
+                    }} className="btn submenu m-3 shadow-lg">Show All Orders
                     </button>
                     <button onClick={() => {
                         ManagerAction.showStat();
                         ManagerAction.stat();
-                    }} className="btn submenu m-3 hadow-lg">Show Stat
+                    }} className="btn submenu m-3 shadow-lg">Show Stat
                     </button>
                 </row>
                 <div className="container-fluid" id="containerManager">

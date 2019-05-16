@@ -22,12 +22,11 @@ class WorkerComponent extends React.Component {
     componentWillUnmount() {
         WorkerStore.removeChangeListener(this._onChange)
     }
-
     render() {
         return (
             <>
-                <div className="container-fluid p-2" id="work">
-                    <div className="card mt-5">
+                <div className="container-fluid p-2 " id="work">
+                    <div className="card mt-5 shadow-lg">
                         <div className="card-header">Orders</div>
                         <div className="card-body">
                             <ul className="list-group">
@@ -65,7 +64,7 @@ class WorkerComponent extends React.Component {
                                                                     <td>{shutter.type}</td>
                                                                     <td>{shutter.status}</td>
                                                                     <td>
-                                                                        <button className="btn btn-info" id="select"
+                                                                        <button className="btn btn-info shadow-lg" id="select"
                                                                                 onClick={() => {
                                                                                     WorkerActions.select(shutter.shutterID);
                                                                                     /*WorkerActions.listOrders();*/
@@ -73,7 +72,7 @@ class WorkerComponent extends React.Component {
                                                                         </button>
                                                                     </td>
                                                                     <td>
-                                                                        <button className="btn btn-info" id="parts"
+                                                                        <button className="btn btn-info shadow-lg" id="parts"
                                                                                 onClick={() => {
                                                                                     WorkerActions.listParts(shutter.shutterID);
                                                                                    /* WorkerActions.listOrders()*/
@@ -88,7 +87,7 @@ class WorkerComponent extends React.Component {
                                                 </td>
                                                 <td className="statusText font-weight-bolder font-italic text-uppercase">{order.status}</td>
                                                 <td>
-                                                    <button className="btn submenu" id="finish"
+                                                    <button className="btn submenu shadow-lg" id="finish"
                                                             onClick={() => WorkerActions.finish(order._id)}>Finish
                                                     </button>
                                                 </td>

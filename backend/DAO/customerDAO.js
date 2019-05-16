@@ -95,9 +95,10 @@ function submit(orderID, callback) {
         }
         var db = client.db(dbName);
         var collectionName = 'orders'
-        var findParams = {"_id": orderID}
+        var findParams = {"_id": orderID.toString()}
         var update = {$set: {"status": "submitted"}}
         db.collection(collectionName).find(findParams).toArray(function (err, order) {
+           // console.log(order)
             if (order[0].status === "added") {
                 db.collection(collectionName).updateOne(findParams, update, (err) => {
                     assert.equal(null, err)

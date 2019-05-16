@@ -51,7 +51,6 @@ workerService.prototype.listParts = function (orderID, callback) {
             this.dao.update("orders", {"_id": orderID.toString()}, {$set: {"summ": summ}}, () => {
                 callback()
             })
-
         }
         callback(order[0]['partsList'])
 

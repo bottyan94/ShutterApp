@@ -25,7 +25,7 @@ class ManagerOrdersDetails extends React.Component {
 
     render() {
         return (
-            <div className="card">
+            <div className="card shadow-lg">
                 <div className="card-header">Orders</div>
                 <div className="card-body">
                     <table className="table table-bordered, table-striped">

@@ -48,7 +48,7 @@ function update(collectionName, findParams, update, callback) {
         assert.equal(null, err);
         const db = client.db(dbName)
         db.collection(collectionName).updateOne(findParams, update, (err) => {
-            assert.equal(null, err)
+            //assert.equal(null, err)
             client.close()
             callback()
         })
@@ -90,38 +90,32 @@ function listOrders(callback) {
     });
 }
 
-//később nézzem át
 function selectShutter(shutterID, callback) {
     var findParams = {"shutter.shutterID": shutterID.toString()}
     read(findParams, "orders", (order) => {
+            // console.log(order)
             let shutter = order[0]['shutter']
             for (let element of shutter) {
-                if (element.status === "") {
+                if (element.status === "" && element.shutterID === shutterID) {
+
                     var updt = {$set: {"shutter.$.status": "selected"}}
                     update("orders", findParams, updt, () => {
-                            read(findParams, "orders", (selected) => {
-                                let array = selected[0]['shutter']
-                                for (let entity of array) {
-                                    if (entity.shutterID === shutterID) {
-                                        read({"type": entity.type}, "parts", (parts) => {
-                                            const obj = {}
-                                            obj['entity'] = entity;
-                                            obj['parts'] = parts;
-                                            var upd = {$push: {"partsList": parts}}
-                                            update("orders", findParams, upd, () => {
-                                            })
-                                        })
-                                    }
-                                }
+                        //    console.log(element.type)
+                        read({"type": element.type}, 'parts', (part) => {
+                            //     console.log(part[0])
+
+                            update("orders", findParams, {$push: {"partsList": part[0]}}, () => {
+
                             })
-                        }
-                    )
+                        })
+                    })
                 }
             }
             callback(`${shutterID} shutter SELECTED!`)
         }
     )
 }
+
 function listPart(shutterID, callback) {
     var findParams = {"shutter.shutterID": shutterID.toString()}
     var upd = {$set: {"shutter.$.status": "done"}}
@@ -148,7 +142,7 @@ function finish(orderID, callback) {
         var collectionName = 'orders'
         var findParams = {_id: orderID.toString()}
         var upd = {$set: {"status": "finished"}}
-        let finish = true
+        var finish = true
         db.collection(collectionName).find(findParams).toArray((err, order) => {
             let array = order[0].shutter
             for (let entity of array) {
@@ -160,8 +154,18 @@ function finish(orderID, callback) {
                 callback('Még nem lehet befejezni, vannak job-ok amik még nem Done-ok')
             }
             if (finish === true) {
-                update("orders", findParams, upd, () => {
-                    callback("Finished");
+                update(collectionName, findParams, upd, () => {
+                    read(findParams, collectionName, (order) => {
+                        var summ=0;
+                        for (let entity of order[0]['partsList']) {
+                            summ = summ+entity.parts[0].price
+                            console.log(summ)
+                        }
+                        update(collectionName,findParams,{$set: {"summ": summ}},() => {
+                            callback("Finished");
+                        })
+                    })
+
                 })
             }
         })
