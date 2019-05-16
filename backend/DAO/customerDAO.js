@@ -23,7 +23,6 @@ function readAll(callback) {
         })
         client.close();
     });
-
 }
 function registerCustomer(customer, callback) {
     var client = MongoClient(url);
@@ -109,7 +108,7 @@ function submit(orderID, callback) {
         })
     });
 }
-function pay(orderID, callback) {
+function pay(orderID, succes,error) {
     var client = MongoClient(url);
     client.connect((err) => {
         if (err !== null) {
@@ -126,13 +125,13 @@ function pay(orderID, callback) {
                 db.collection(collectionName).updateOne(findParams, update, (err) => {
                     assert.equal(null, err)
                     client.close()
-                    callback(order[0].customer.customerID)
+                    succes(order[0].customer.customerID)
                 })
-            }
+            }else {error("only when the status is Installed")}
         })
     });
 }
-function invoice(orderID, callback) {
+function invoice(orderID, succes, error) {
     var client = MongoClient(url);
     client.connect((err) => {
         if (err !== null) {
@@ -149,9 +148,9 @@ function invoice(orderID, callback) {
                 db.collection("invoice").find({"_id": order[0].invoice.toString()}).toArray(function (err, invoice) {
                     assert.equal(null, err)
                     client.close()
-                    callback(invoice)
+                    succes(invoice)
                 })
-            }
+            }else {error("not ready yet")}
         })
     });
 }

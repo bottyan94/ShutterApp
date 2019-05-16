@@ -61,8 +61,8 @@ shutterDispatcher.register((data) => {
             "Accept": "application/json"
         }
     }).then(response => {
-        console.log('asd')
-        console.log(response)
+       // console.log('asd')
+     //   console.log(response)
         return response.json()
     }).then(result => {
         CustomersStore._selectedStore = result;
@@ -86,8 +86,11 @@ shutterDispatcher.register((data) => {
             "Content-Type": "application/json",
             "Accept": "application/json"
         }
-    }).then(() => {
-      //  CustomersStore._selectedCustomer=data.payload.payload
+    }).then(response =>{
+        console.log(response)
+        return response.text()
+    })
+        .then(result => {
         CustomerActions.listOrders(CustomersStore._selectedCustomer)
         CustomersStore.emitChange();
     })
@@ -123,6 +126,7 @@ shutterDispatcher.register((data) => {
     }).then(response => {
         return response.text()
     }).then((res) => {
+        console.log(res)
         CustomerActions.listOrders(CustomersStore._selectedCustomer)
         CustomersStore.emitChange()
     })
@@ -143,7 +147,6 @@ shutterDispatcher.register((data) => {
             return response.text()
         })
         .then((result) => {
-            alert(result)
             CustomersStore.emitChange();
         })
     CustomersStore.emitChange();
@@ -176,7 +179,6 @@ shutterDispatcher.register((data) => {
     if (data.payload.actionType !== "listPart") {
         return;
     }
-
     fetch('worker/listPart/' + data.payload.payload, {
         headers: {
             "Content-Type": "application/json",
@@ -254,6 +256,7 @@ shutterDispatcher.register((data) => {
     }).then(response => {
         return response.text()
     }).then(result => {
+        console.log(result)
         WorkerStore._selectedOrder = result;
         WorkerActions.listOrders();
         WorkerStore.emitChange();

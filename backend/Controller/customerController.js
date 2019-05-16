@@ -40,21 +40,26 @@ router.post('/addShutter', (req, res) => {
             res.status(200).send(request)
         },
         (error) => {
-            res.status(400).send( error)
+            res.status(400).send(error)
         })
 })
 router.get('/ownOrders/:customerID', (req, res) => {
-    customerService.ownOrders(req.params['customerID'], (orders) => {
-        res.status(200).send(orders)
-    })
+    try {
+        customerService.ownOrders(req.params['customerID'], (orders) => {
+            res.status(200).send(orders)
+        })
+    } catch (e) {
+        res.status(500).send(e)
+    }
 })
 router.get('/submit/:orderID', (req, res) => {
     customerService.submit(req.params['orderID'],
         (submitted) => {
-            res.status(200).send(submitted)
-        },
-        (error) => {
-            res.status(400).send(error)
+            try {
+                res.status(200).send(submitted)
+            } catch (e) {
+                res.status(400).send(e)
+            }
         })
 })
 router.get('/invoice/:orderID', (req, res) => {
@@ -64,18 +69,16 @@ router.get('/invoice/:orderID', (req, res) => {
             res.status(200).send(invoice)
         },
         (error) => {
-            res.status(400).send(error)
+            res.status(500).send(error)
         })
 })
 router.get('/pay/:orderID', (req, res) => {
     customerService.pay(req.params['orderID'],
-        (customerID) => {
-            console.log(customerID);
-            res.status(200).send()
+        (succes) => {
+            res.status(200).send(succes)
         },
-        (error) => {
-            console.log(error);
-            res.status(400).send(error)
+        (err) => {
+            res.status(500).send(err)
         })
 })
 

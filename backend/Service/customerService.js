@@ -24,15 +24,15 @@ CustomerService.prototype.list = function (callback) {
         callback(customers)
     })
 }
-CustomerService.prototype.registerCustomer = function (customer, succes) {
+CustomerService.prototype.registerCustomer = function (customer, callback) {
     var customerID = uniqID.generateUUID('xxxx', 10)();
     customer['_id'] = customerID
     this.dao.registerCustomer(customer, (insert)=>{
         logger.info(`${customer.customer.name} inserted!`)
-        succes(insert)
+        callback(insert)
     })
 }
-CustomerService.prototype.addShutter = function (order, succes, error) {
+CustomerService.prototype.addShutter = function (order, callback) {
     var orderID = uniqID.generateUUID('xxxx', 10)();
     var shutterID;
     order['_id'] = orderID
@@ -41,28 +41,28 @@ CustomerService.prototype.addShutter = function (order, succes, error) {
         i.shutterID = shutterID
     }
     this.dao.addOrder(order,() =>{
-        succes();
+        callback();
     })
 }
-CustomerService.prototype.ownOrders = function (customerID, succes) {
+CustomerService.prototype.ownOrders = function (customerID, callback) {
    this.dao.ownOrders(customerID,(orders)=>{
-        succes(orders)
+       callback(orders)
    })
 }
-CustomerService.prototype.submit = function (orderID, succes, error) {
-   this.dao.submit(orderID,(callback)=>{
-       succes(callback)
+CustomerService.prototype.submit = function (orderID, callback) {
+   this.dao.submit(orderID,(cb)=>{
+       callback(cb)
    })
 }
 CustomerService.prototype.invoice = function (orderID, succes, error) {
-    this.dao.invoice(orderID,(callback)=>{
-        succes(callback)
-    })
+    this.dao.invoice(orderID,(succ)=>{
+        succes(succ)
+    },(err)=>error(err))
 }
 CustomerService.prototype.pay = function (orderID, succes, error) {
-    this.dao.pay(orderID, (callback)=>{
-        succes(callback)
-    })
+    this.dao.pay(orderID, (succ)=>{
+        succes(succ)
+    },(err)=>error(err))
 }
 
 module.exports = CustomerService;

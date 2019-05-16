@@ -66,39 +66,42 @@ class OrdersDetails extends React.Component {
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td>
-                                        <td className="text-center statusText font-weight-bolder font-italic text-uppercase">{order.status}
-                                        </td>
-                                        <tr>
-                                            <td className="text-center statusText font-weight-bolder font-italic text-uppercase">{order.payment}</td>
-                                        </tr>
+
+                                    <td className="text-center statusText font-weight-bolder font-italic text-uppercase">
+                                        {order.status}
+                                        <br/>
+                                        {order.payment}
                                     </td>
 
 
-                                    <button className="btn btn-success m-2"
-                                            onClick={() => CustomerActions.submit(order._id)}>Submit
-                                    </button>
 
-                                    <button  className="btn btn-success m-2"
-                                            onClick={() => CustomerActions.invoice(order._id)}>SeeInvoince
-                                    </button>
-                                    <button  className="btn btn-success m-2"
-                                            onClick={() => CustomerActions.pay(order._id)}>Pay
-                                    </button>
+
+                                    <td>
+                                        <button className="btn btn-success m-2"
+                                                onClick={() => CustomerActions.submit(order._id)}>Submit
+                                        </button>
+                                        <button className="btn btn-success m-2"
+                                                onClick={() => CustomerActions.invoice(order._id)}>SeeInvoince
+                                        </button>
+                                        <button className="btn btn-success m-2"
+                                                onClick={() => CustomerActions.pay(order._id)}>Pay
+                                        </button>
+                                    </td>
+
 
 
                                 </tr>
-                            )
+                        )
 
                         })}
                         </tbody>
                         }
-                    </table>
-                </div>
-            </div>
+                            </table>
+                            </div>
+                            </div>
 
-        )
-    }
-}
+                            )
+                        }
+                        }
 
-export default OrdersDetails
+                        export default OrdersDetails
