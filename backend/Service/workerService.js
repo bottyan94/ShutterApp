@@ -43,7 +43,7 @@ workerService.prototype.listParts = function (orderID, callback) {
     this.dao.read({"_id": orderID}, "orders", (order) => {
         let summ = 0
         let array = order[0]['partsList']
-        console.log(order[0]['partsList'])
+       // console.log(order[0]['partsList'])
         for (let entity of array) {
             //console.log(entity[0]['parts'][0]['price'])
             summ = summ + (entity[0]['parts'][0]['price'])

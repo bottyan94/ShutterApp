@@ -77,8 +77,8 @@ router.get('/pay/:orderID', (req, res) => {
         (succes) => {
             res.status(200).send(succes)
         },
-        (err) => {
-            res.status(500).send(err)
+        (error) => {
+            res.status(500).send(error)
         })
 })
 

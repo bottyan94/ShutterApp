@@ -41,6 +41,9 @@ CustomerService.prototype.addShutter = function (order, callback) {
         shutterID = uniqID.generateUUID('xxxx', 10)();
         if (shutterID >= 1000) {
             i.shutterID = shutterID
+        } else {
+            shutterID = uniqID.generateUUID('xxxx', 10)();
+            i.shutterID = shutterID
         }
     }
     this.dao.addOrder(order, () => {
@@ -60,13 +63,13 @@ CustomerService.prototype.submit = function (orderID, callback) {
 CustomerService.prototype.invoice = function (orderID, succes, error) {
     this.dao.invoice(orderID, (succ) => {
         var invoiceString = "Invoice ID: " + succ[0]._id + "\nNév: " + succ[0].customer;
-        var shutters=""
+        var shutters = ""
 
         for (let shut of succ[0]['shutter']) {
-            console.log(shut)
-            shutters =shutters+"\n\nShutters: " + "\nheight: " + shut.height + "\nwidth: " + shut.width + "\ncolor: " + shut.color + "\ntype: " + shut.type;
+          //  console.log(shut)
+            shutters = shutters + "\n\nShutters: " + "\nheight: " + shut.height + "\nwidth: " + shut.width + "\ncolor: " + shut.color + "\ntype: " + shut.type;
         }
-        succes(invoiceString + "\n\nÁr: " + succ[0].summ+ shutters + "\n\n\nÁr: " + succ[0].summ)
+        succes(invoiceString + "\n\nÁr: " + succ[0].summ + shutters + "\n\n\nÁr: " + succ[0].summ)
     }, (err) => error(err))
 }
 CustomerService.prototype.pay = function (orderID, succes, error) {

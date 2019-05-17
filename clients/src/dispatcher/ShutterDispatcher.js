@@ -65,6 +65,7 @@ shutterDispatcher.register((data) => {
      //   console.log(response)
         return response.json()
     }).then(result => {
+        console.log(result)
         CustomersStore._selectedStore = result;
         CustomersStore._selectedCustomer = data.payload.payload
         CustomersStore.emitChange();
@@ -127,7 +128,7 @@ shutterDispatcher.register((data) => {
         return response.text()
     }).then((res) => {
         console.log(res)
-        CustomerActions.listOrders(CustomersStore._selectedCustomer)
+        //CustomerActions.listOrders(CustomersStore._selectedCustomer)
         CustomersStore.emitChange()
     })
 });
